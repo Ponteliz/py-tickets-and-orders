@@ -21,8 +21,14 @@ class Actor(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255, db_index=True)
     description = models.TextField()
-    actors = models.ManyToManyField(to=Actor, related_name="movies")
-    genres = models.ManyToManyField(to=Genre, related_name="movies")
+    actors = models.ManyToManyField(
+        to=Actor,
+        related_name="movies",
+    )
+    genres = models.ManyToManyField(
+        to=Genre,
+        related_name="movies",
+    )
 
     def __str__(self) -> str:
         return self.title
@@ -80,10 +86,12 @@ class Ticket(models.Model):
     movie_session = models.ForeignKey(
         to=MovieSession,
         on_delete=models.CASCADE,
+        related_name="tickets",
     )
     order = models.ForeignKey(
         to=Order,
         on_delete=models.CASCADE,
+        related_name="tickets",
     )
     row = models.IntegerField()
     seat = models.IntegerField()
