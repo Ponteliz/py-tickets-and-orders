@@ -18,7 +18,9 @@ def create_order(
     order = Order.objects.create(user=user)
 
     if date is not None:
-        Order.objects.filter(pk=order.pk).update(created_at=date)
+        Order.objects.filter(id=order.id).update(
+            created_at=date
+        )
         order.created_at = date
 
     for ticket in tickets:
